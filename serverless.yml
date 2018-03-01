@@ -37,7 +37,7 @@ plugins:
     - serverless-webpack
     - serverless-offline
     # - serverless-plugin-aws-alerts
-    - serverless-domain-manager
+    # - serverless-domain-manager
     - serverless-plugin-split-stacks
 
 provider:
