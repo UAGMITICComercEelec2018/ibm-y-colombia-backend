@@ -5,8 +5,7 @@
   "main": "handler.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "debug":
-      "export SLS_DEBUG=* && serverless offline start --port 9000 --stage local",
+    "debug": "export SLS_DEBUG=* && serverless offline start --port 9000 --stage local",
     "start": "serverless offline start --port 9000 --stage local",
     "deploy": "sh -ac '. ./deploy.sh $FUNCTION'"
   },
@@ -23,6 +22,7 @@
     "babel-preset-stage-3": "^6.24.1",
     "glob": "^7.1.2",
     "serverless": "^1.24.1",
+    "serverless-domain-manager": "^1.1.25",
     "serverless-nested-stack": "0.0.7",
     "serverless-offline": "^3.16.0",
     "serverless-plugin-aws-alerts": "^1.2.4",
@@ -46,7 +46,6 @@
     "request": "^2.82.0",
     "request-promise": "^4.2.2",
     "sequelize": "4.8.0",
-    "serverless-domain-manager": "^1.1.21",
     "serverless-plugin-log-subscription": "^1.1.1",
     "ts-loader": "^3.2.0",
     "typescript": "^2.6.2",

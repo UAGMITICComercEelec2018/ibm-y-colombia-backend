@@ -28,16 +28,17 @@ custom:
     #     - functionErrors
     #     - functionThrottles
     customDomain:
-      basePath: ${file(./serverless.env.yml):${opt:stage, self:custom.default_stage}.SERVICE_DOMAIN_BASE_PATH}
-      domainName: ${file(./serverless.env.yml):${opt:stage, self:custom.default_stage}.SERVICE_DOMAIN_NAME}
-      certificateName: ${file(./serverless.env.yml):${opt:stage, self:custom.default_stage}.DOMAIN_CERTIFICATE_NAME}
-      stage: ${opt:stage, self:custom.default_stage}
-      createRoute53Record: true
+        basePath: ${file(./serverless.env.yml):${opt:stage, self:custom.default_stage}.SERVICE_DOMAIN_BASE_PATH}
+        domainName: ${file(./serverless.env.yml):${opt:stage, self:custom.default_stage}.SERVICE_DOMAIN_NAME}
+        #certificateName: ${file(./serverless.env.yml):${opt:stage, self:custom.default_stage}.DOMAIN_CERTIFICATE_NAME}
+        stage: ${opt:stage, self:custom.default_stage}
+        createRoute53Record: true
+        #hostedZoneId: Z3S0K108I6IDP9
 plugins:
     - serverless-webpack
     - serverless-offline
     # - serverless-plugin-aws-alerts
-    # - serverless-domain-manager
+    - serverless-domain-manager
     - serverless-plugin-split-stacks
 
 provider:
