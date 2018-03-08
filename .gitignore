@@ -19,4 +19,4 @@ yarn-error.log*
 \.idea/
 
 \.vscode/
-serverless\.env\.yml
+#serverless\.env\.yml
