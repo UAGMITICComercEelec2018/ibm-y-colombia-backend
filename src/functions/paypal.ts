@@ -12,6 +12,46 @@ export async function createPayPalCharge(ev, context, callback) {
 		'client_secret': process.env.PAYPAL_CLIENT_SECRET
 	});
 
+	const items = [
+		{
+			id: 'item1',
+			description: 'item1',
+			info: {
+				name: 'item',
+				sku: 'item',
+				price: '100.00',
+				currency: 'USD',
+				quantity: 1
+			},
+			price: {
+				currency: 'USD',
+				total: '100.00'
+			}
+		},
+		{
+			id: 'item2',
+			description: 'item2',
+			info: {
+				name: 'item2',
+				sku: 'item2',
+				price: '200.00',
+				currency: 'USD',
+				quantity: 1
+			},
+			price: {
+				currency: 'USD',
+				total: '200.00'
+			}
+		}
+	];
+
+	const { itemID } = ev.pathParameters;
+	const item = items.find(i => i.id == itemID);
+
+	if (!item) {
+		return callback(null, failure({ error: 'Item no econtrado' }));
+	}
+
 	const create_payment_json = JSON.stringify({
 		intent: 'sale',
 		payer: {
@@ -23,17 +63,10 @@ export async function createPayPalCharge(ev, context, callback) {
 		},
 		transactions: [{
 			item_list: {
-				items: [{
-					name: 'item',
-					sku: 'item',
-					price: '1.00',
-					currency: 'USD',
-					quantity: 1
-				}]
+				items: [item.info]
 			},
 			amount: {
-				currency: 'USD',
-				total: '1.00'
+				...item.price
 			},
 			description: 'This is the payment description.'
 		}]

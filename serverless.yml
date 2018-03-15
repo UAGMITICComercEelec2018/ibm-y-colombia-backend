@@ -90,7 +90,7 @@ functions:
         timeout: 30
         events:
             - http:
-                path: paypal/charge
+                path: paypal/charge/{itemID}
                 method: get
                 cors: true
     handlerPayPalResult:
