@@ -8,8 +8,8 @@ export async function createPayPalCharge(ev, context, callback) {
 
 	paypal.configure({
 		'mode': 'sandbox', //sandbox or live
-		'client_id': 'AWrPg867dXazYibADcxykNWsP3IJYYr5KXq0J82Q6FBtcHaY_mttPaE6OGDR_WLAYNMZ3YeesnJc1wzU',
-		'client_secret': 'EHPhayNQag75jFsSK1aBMPDosQ64a4Y26LJiM8v7_nL7Fa-cOxeg_kWCmDVslXeQ0DGT-S6eKm47NDxr'
+		'client_id': process.env.PAYPAL_CLIENT_ID,
+		'client_secret': process.env.PAYPAL_CLIENT_SECRET
 	});
 
 	const create_payment_json = JSON.stringify({
@@ -18,8 +18,8 @@ export async function createPayPalCharge(ev, context, callback) {
 			payment_method: 'paypal'
 		},
 		redirect_urls: {
-			return_url: 'http://return.url',
-			cancel_url: 'http://cancel.url'
+			return_url: process.env.PAYPAL_SERVICE_RETURN_URL,
+			cancel_url: process.env.PAYPAL_SERVICE_ERROR_URL
 		},
 		transactions: [{
 			item_list: {
@@ -55,6 +55,35 @@ export async function createPayPalCharge(ev, context, callback) {
 		console.log("error: ", error);
 		return callback(null, failure(error))
 	}
+}
 
+export async function handlerPayPalResult(ev, context, callback) {
+	console.log("ev: ", ev);
+
+	try {
+		const { successOrError } = ev.pathParameters;
+		const { paymentId, PayerID: payer_id } = ev.queryStringParameters;
+
+		if ('success' !== successOrError) {
+			throw ev;
+		}
+
+		const payment = await new Promise((resolve, reject) =>
+			paypal.payment.execute(paymentId, { payer_id }, (error, payment) => {
+				if (error) {
+					reject(error);
+				}
+				resolve(payment);
+			})
+		);
+
+		console.log(payment);
+
+		return callback(null, success(payment));
+	}
+	catch (error) {
+		console.log("error: ", error);
+		return callback(null, failure(error));
+	}
 
 }
