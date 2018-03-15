@@ -85,3 +85,11 @@ functions:
                 path: charge/oxxo
                 method: put
                 cors: true
+    createPayPalCharge:
+        handler: src/functions/paypal.createPayPalCharge
+        timeout: 30
+        events:
+            - http:
+                path: paypal/charge
+                method: get
+                cors: true
