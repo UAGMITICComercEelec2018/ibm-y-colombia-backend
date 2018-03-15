@@ -101,3 +101,8 @@ functions:
                 path: paypal/result/{successOrError}
                 method: get
                 cors: true
+    onPayPalPurchaseSNS:
+        handler: src/functions/paypal.onPayPalPurchaseSNS
+        timeout: 30
+        events:
+            - sns: ${file(./serverless.env.yml):${opt:stage, self:custom.default_stage}.PAYPAL_PURCHASE_SNS}

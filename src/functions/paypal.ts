@@ -120,3 +120,8 @@ export async function handlerPayPalResult(ev, context, callback) {
 	}
 
 }
+
+export async function onPayPalPurchaseSNS(ev, context, callback) {
+	console.log(ev);
+	return callback(null, success({ ev }));
+}
