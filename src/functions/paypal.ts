@@ -1,5 +1,5 @@
 'use strict';
-import { success, failure, notAllowed } from './../libs/response-lib';
+import { success, failure, notAllowed, redirect } from './../libs/response-lib';
 import * as paypal from 'paypal-rest-sdk';
 import { resolve } from "url";
 
@@ -112,11 +112,11 @@ export async function handlerPayPalResult(ev, context, callback) {
 
 		console.log(payment);
 
-		return callback(null, success(payment));
+		return callback(null, redirect(process.env.PAYPAL_PURCHASE_SUCCESS_URL));
 	}
 	catch (error) {
 		console.log("error: ", error);
-		return callback(null, failure(error));
+		return callback(null, redirect(process.env.PAYPAL_PURCHASE_ERROR_URL));
 	}
 
 }
