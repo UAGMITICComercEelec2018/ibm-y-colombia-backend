@@ -12,6 +12,8 @@ export async function createPayPalCharge(ev, context, callback) {
 		'client_secret': process.env.PAYPAL_CLIENT_SECRET
 	});
 
+	console.log(process.env.PAYPAL_CLIENT_ID);
+
 	console.log("ev.queryStringParameters: ", ev.queryStringParameters);
 	console.log("ev.pathParameters: ", ev.pathParameters);
 
