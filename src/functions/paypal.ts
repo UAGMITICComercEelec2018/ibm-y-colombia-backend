@@ -71,7 +71,11 @@ export async function createPayPalCharge(ev, context, callback) {
 				}
 			})
 		);
-		return callback(null, success(payment))
+		console.log("payment: ", payment);
+
+		var test : any = payment
+
+		return callback(null, redirect(test.links[1].href))
 	} catch (error) {
 		console.log("error: ", error);
 		return callback(null, failure(error))
