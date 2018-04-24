@@ -1,5 +1,5 @@
 "use strict";
-import { success, failure, notAllowed } from "./../libs/response-lib";
+import { success, failure, notAllowed, redirect } from "./../libs/response-lib";
 import * as conekta from "conekta";
 import { resolve } from "url";
 conekta.api_key = process.env.CONEKTA_API_KEY;
@@ -55,7 +55,7 @@ export async function createOxxoCharge(ev, context, callback) {
         }
       )
     );
-    return callback(null, success("EXITOOOOOOOO"));
+    return callback(null, redirect(process.env.PURCHASE_SUCCESS_URL));
     // console.log(order);
   } catch (error) {
     // console.log(error);

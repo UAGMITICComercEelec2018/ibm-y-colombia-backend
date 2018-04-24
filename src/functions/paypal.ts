@@ -104,11 +104,11 @@ export async function handlerPayPalResult(ev, context, callback) {
 
 		console.log(payment);
 
-		return callback(null, redirect(process.env.PAYPAL_PURCHASE_SUCCESS_URL));
+		return callback(null, redirect(process.env.PURCHASE_SUCCESS_URL));
 	}
 	catch (error) {
 		console.log("error: ", error);
-		return callback(null, redirect(process.env.PAYPAL_PURCHASE_ERROR_URL));
+		return callback(null, redirect(process.env.PURCHASE_ERROR_URL));
 	}
 
 }
