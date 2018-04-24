@@ -12,35 +12,23 @@ export async function createPayPalCharge(ev, context, callback) {
 		'client_secret': process.env.PAYPAL_CLIENT_SECRET
 	});
 
+	console.log("ev.queryStringParameters: ", ev.queryStringParameters);
+	console.log("ev.pathParameters: ", ev.pathParameters);
+
 	const items = [
 		{
-			id: 'item1',
-			description: 'item1',
+			id: ev.pathParameters.itemID,
+			description: ev.queryStringParameters.desc,
 			info: {
-				name: 'item',
-				sku: 'item',
-				price: '100.00',
-				currency: 'USD',
+				name: ev.queryStringParameters.name,
+				sku: ev.queryStringParameters.sku,
+				price: ev.queryStringParameters.price,
+				currency: ev.queryStringParameters.currency,
 				quantity: 1
 			},
 			price: {
-				currency: 'USD',
-				total: '100.00'
-			}
-		},
-		{
-			id: 'item2',
-			description: 'item2',
-			info: {
-				name: 'item2',
-				sku: 'item2',
-				price: '200.00',
-				currency: 'USD',
-				quantity: 1
-			},
-			price: {
-				currency: 'USD',
-				total: '200.00'
+				currency: ev.queryStringParameters.currency,
+				total: ev.queryStringParameters.price
 			}
 		}
 	];

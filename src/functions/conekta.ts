@@ -5,8 +5,11 @@ import { resolve } from "url";
 conekta.api_key = process.env.CONEKTA_API_KEY;
 conekta.api_version = "2.0.0";
 
-export async function createOxxoCharge(event, context, callback) {
-  console.log(conekta);
+export async function createOxxoCharge(ev, context, callback) {
+  //console.log(conekta);
+
+  console.log("ev.queryStringParameters: ", ev.queryStringParameters);
+  console.log("ev.pathParameters: ", ev.pathParameters);
   const { Card } = conekta;
   try {
     const order = await new Promise((resolve, reject) =>

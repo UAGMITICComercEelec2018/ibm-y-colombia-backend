@@ -82,7 +82,7 @@ functions:
         timeout: 30
         events:
             - http:
-                path: charge/oxxo
+                path: oxxo/charge/{itemID}
                 method: put
                 cors: true
     createPayPalCharge:
