@@ -17,9 +17,9 @@ export async function createOxxoCharge(ev, context, callback) {
         {
           line_items: [
             {
-              name: "Tacos",
-              unit_price: 1000,
-              quantity: 12
+              name: ev.queryStringParameters.name,
+              unit_price: ev.queryStringParameters.price,
+              quantity: 1
             }
           ],
           shipping_lines: [
@@ -28,7 +28,7 @@ export async function createOxxoCharge(ev, context, callback) {
               carrier: "FEDEX"
             }
           ], //shipping_lines - phyiscal goods only
-          currency: "MXN",
+          currency: ev.queryStringParameters.currency,
           customer_info: {
             name: "Fulanito Pérez",
             email: "fulanito@conekta.com",
