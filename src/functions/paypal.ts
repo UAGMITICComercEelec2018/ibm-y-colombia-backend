@@ -12,7 +12,7 @@ export async function createPayPalCharge(ev, context, callback) {
 		'client_secret': process.env.PAYPAL_CLIENT_SECRET
 	});
 
-	console.log(process.env.PAYPAL_CLIENT_ID);
+
 
 	console.log("ev.queryStringParameters: ", ev.queryStringParameters);
 	console.log("ev.pathParameters: ", ev.pathParameters);
@@ -64,7 +64,7 @@ export async function createPayPalCharge(ev, context, callback) {
 
 	try {
 		const payment = await new Promise((resolve, reject) =>
-			paypal.payment.create(create_payment_json, function(error, payment) {
+			paypal.payment.create(create_payment_json, function (error, payment) {
 				if (error) {
 					reject(error);
 				} else {
@@ -75,7 +75,7 @@ export async function createPayPalCharge(ev, context, callback) {
 		);
 		console.log("payment: ", payment);
 
-		var test : any = payment
+		var test: any = payment
 
 		return callback(null, redirect(test.links[1].href))
 	} catch (error) {
