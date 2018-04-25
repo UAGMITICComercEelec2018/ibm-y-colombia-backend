@@ -7,12 +7,10 @@ export async function createPayPalCharge(ev, context, callback) {
 	console.log(ev);
 
 	paypal.configure({
-		'mode': 'sandbox', //sandbox or live
+		'mode': process.env.PAYPAL_MODE, //sandbox or live
 		'client_id': process.env.PAYPAL_CLIENT_ID,
 		'client_secret': process.env.PAYPAL_CLIENT_SECRET
 	});
-
-
 
 	console.log("ev.queryStringParameters: ", ev.queryStringParameters);
 	console.log("ev.pathParameters: ", ev.pathParameters);
