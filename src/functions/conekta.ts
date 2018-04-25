@@ -7,7 +7,7 @@ conekta.api_version = "2.0.0";
 
 export async function createOxxoCharge(ev, context, callback) {
   //console.log(conekta);
-
+  context.callbackWaitsForEmptyEventLoop = false;
   console.log("ev.queryStringParameters: ", ev.queryStringParameters);
   console.log("ev.pathParameters: ", ev.pathParameters);
   const { Card } = conekta;
