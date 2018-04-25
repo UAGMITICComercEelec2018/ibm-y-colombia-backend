@@ -84,6 +84,8 @@ export async function createPayPalCharge(ev, context, callback) {
 
 export async function handlerPayPalResult(ev, context, callback) {
 	console.log("ev: ", ev);
+	console.log("ev.pathParameters: ", ev.pathParameters);
+	console.log("ev.queryStringParameters: ", ev.queryStringParameters);
 
 	try {
 		const { successOrError } = ev.pathParameters;
@@ -102,7 +104,7 @@ export async function handlerPayPalResult(ev, context, callback) {
 			})
 		);
 
-		console.log(payment);
+		console.log("payment: ", payment);
 
 		return callback(null, redirect(process.env.PURCHASE_SUCCESS_URL));
 	}
