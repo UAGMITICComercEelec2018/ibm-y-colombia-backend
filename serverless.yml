@@ -83,7 +83,7 @@ functions:
         events:
             - http:
                 path: oxxo/charge/{itemID}
-                method: put
+                method: get
                 cors: true
     createPayPalCharge:
         handler: src/functions/paypal.createPayPalCharge
