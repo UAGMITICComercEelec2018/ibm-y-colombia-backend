@@ -60,10 +60,13 @@ export async function createPayPalCharge(ev, context, callback) {
 		}]
 	});
 
+	console.log("create_payment_json: ", create_payment_json);
+
 	try {
 		const payment = await new Promise((resolve, reject) =>
 			paypal.payment.create(create_payment_json, function (error, payment) {
 				if (error) {
+					console.log("paypal.payment.create Error: ", error);
 					reject(error);
 				} else {
 					console.log("Create Payment Response");
@@ -92,9 +95,11 @@ export async function handlerPayPalResult(ev, context, callback) {
 		const { paymentId, PayerID: payer_id } = ev.queryStringParameters;
 
 		if ('success' !== successOrError) {
+			console.log("Tiro el ev");
 			throw ev;
 		}
 
+		console.log("antes del payment");
 		const payment = await new Promise((resolve, reject) =>
 			paypal.payment.execute(paymentId, { payer_id }, (error, payment) => {
 				if (error) {
